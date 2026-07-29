@@ -94,6 +94,7 @@ import com.ichi2.anki.android.back.exitViaDoubleTapBackCallback
 import com.ichi2.anki.android.input.ShortcutGroup
 import com.ichi2.anki.android.input.shortcut
 import com.ichi2.anki.android.view.locationInWindow
+import com.ichi2.anki.blocker.BlockerStatusBar
 import com.ichi2.anki.common.android.AdaptionUtil
 import com.ichi2.anki.common.android.animationDisabled
 import com.ichi2.anki.common.android.appContext
@@ -1442,6 +1443,7 @@ open class DeckPicker :
         if (navDrawerIsReady() && hasCollectionStoragePermissions()) {
             refreshState()
         }
+        BlockerStatusBar.refresh(this)
         message?.let { dialogHandler.sendStoredMessage(it) }
     }
 

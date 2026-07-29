@@ -288,5 +288,7 @@
     <string name="blocker_gate_deck_key">blockerGateDeckId</string>
     <string name="blocker_gate_deck_entry_key">blockerGateDeckEntry</string>
     <string name="blocker_unlock_sessions_key">blockerUnlockSessions</string>
+    <string name="blocker_unlocks_today_key">blockerUnlocksToday</string>
+    <string name="blocker_unlocks_today_day_key">blockerUnlocksTodayDay</string>
     <string name="pref_blocker_launch_gate_key">blockerDevLaunchGate</string>
 </resources>

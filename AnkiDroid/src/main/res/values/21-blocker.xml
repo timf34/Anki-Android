@@ -64,4 +64,27 @@
     <string name="blocker_inactive_settings_warning">Blocking is paused. Tap “Accessibility service” above to turn the permission back on.</string>
     <!-- Shown in blocker settings when the blocker is on but nothing has been blocked yet -->
     <string name="blocker_nothing_blocked">Nothing is blocked yet. Choose the apps or websites you want to gate.</string>
+
+    <!-- Deck picker status row -->
+    <!-- Status row summary when blocking has stopped working -->
+    <string name="blocker_status_paused">Paused — accessibility permission is off</string>
+    <!-- Status row summary when the user has turned the blocker off -->
+    <string name="blocker_status_off">Off</string>
+    <!-- Status row summary combining what is blocked with today's unlock count. %1$s is like "3 apps, 1 website", %2$s is like "4 unlocks today" -->
+    <string name="blocker_status_with_unlocks">%1$s · %2$s</string>
+    <!-- Part of the status row: how many apps are blocked -->
+    <plurals name="blocker_status_apps">
+        <item quantity="one">%d app</item>
+        <item quantity="other">%d apps</item>
+    </plurals>
+    <!-- Part of the status row: how many websites are blocked -->
+    <plurals name="blocker_status_sites">
+        <item quantity="one">%d website</item>
+        <item quantity="other">%d websites</item>
+    </plurals>
+    <!-- Part of the status row: how many gates were passed today -->
+    <plurals name="blocker_status_unlocks">
+        <item quantity="one">%d unlock today</item>
+        <item quantity="other">%d unlocks today</item>
+    </plurals>
 </resources>

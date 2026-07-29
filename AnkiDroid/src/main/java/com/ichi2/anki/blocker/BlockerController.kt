@@ -26,6 +26,7 @@ object BlockerController {
     fun grantUnlock(target: BlockTarget) {
         val minutes = BlockerPrefs.unlockMinutes
         UnlockStore.grant(target, durationMs = minutes.minutes.inWholeMilliseconds)
+        BlockerPrefs.recordUnlock()
         Timber.i("Blocker: unlocked %s for %d minutes", target.key, minutes)
         service?.onUnlockGranted()
     }

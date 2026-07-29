@@ -7,7 +7,9 @@ import androidx.annotation.StringRes
 import androidx.core.content.edit
 import com.ichi2.anki.AnkiDroidApp
 import com.ichi2.anki.R
+import com.ichi2.anki.common.time.TimeManager
 import com.ichi2.anki.libanki.DeckId
+import java.util.TimeZone
 
 /**
  * Blocker settings, kept separate from [com.ichi2.anki.settings.Prefs] so the
@@ -84,4 +86,35 @@ object BlockerPrefs {
     var unlockSessionsJson: String?
         get() = prefs.getString(key(R.string.blocker_unlock_sessions_key), null)
         set(value) = prefs.edit { putString(key(R.string.blocker_unlock_sessions_key), value) }
+
+    /**
+     * How many gates have been passed today, for the deck picker's status card.
+     * Resets on the first read or write of a new day.
+     */
+    val unlocksToday: Int
+        get() = if (storedUnlockDay == currentDay()) prefs.getInt(key(R.string.blocker_unlocks_today_key), 0) else 0
+
+    fun recordUnlock() {
+        val today = currentDay()
+        val count = if (storedUnlockDay == today) unlocksToday + 1 else 1
+        prefs.edit {
+            putInt(key(R.string.blocker_unlocks_today_key), count)
+            putLong(key(R.string.blocker_unlocks_today_day_key), today)
+        }
+    }
+
+    private val storedUnlockDay: Long
+        get() = prefs.getLong(key(R.string.blocker_unlocks_today_day_key), -1)
+
+    /**
+     * Days since the epoch in local time. Deliberately not Anki's day cutoff: this
+     * counts phone usage, which the user thinks about as calendar days.
+     */
+    private fun currentDay(): Long {
+        val zone = TimeZone.getDefault()
+        val nowMs = TimeManager.time.intTimeMS()
+        return (nowMs + zone.getOffset(nowMs)) / MILLIS_PER_DAY
+    }
+
+    private const val MILLIS_PER_DAY = 24L * 60 * 60 * 1000
 }
